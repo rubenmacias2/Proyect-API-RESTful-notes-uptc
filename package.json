@@ -1,0 +1,27 @@
+{
+  "name": "proyect-api-restful-notes-uptc",
+  "version": "1.0.0",
+  "description": "This is a RESTful API for the university. In this RESTful API you manage the creation and editing of your notes. For now it is available only to UPTC students.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubenmacias2/Proyect-API-RESTful-notes-uptc.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "Express",
+    "JavaScript"
+  ],
+  "author": "RUBEN ARCADIO MACIAS SOCHA ,SERGIO ALEJANDRO QUINTANA VARGAS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rubenmacias2/Proyect-API-RESTful-notes-uptc/issues"
+  },
+  "homepage": "https://github.com/rubenmacias2/Proyect-API-RESTful-notes-uptc#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
