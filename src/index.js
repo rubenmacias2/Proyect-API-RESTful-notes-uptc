@@ -47,7 +47,7 @@ app.get('/save-admin', async(req, res) => {
     res.send("save succeful");
 });
 
-app.get('/show-team', async(req, res) => {
+app.get('/show-user', async(req, res) => {
     scUser.findOne({ name: 1 }, (err, doc) => {
         console.log(doc);
         res.send(doc);
