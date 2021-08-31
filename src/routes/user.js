@@ -3,24 +3,30 @@ var scUser = require('../models/modelUser');
 
 
 // cambiar a post post para traer datos para guardar en la db
-router.get('/sign-up', async(req, res) => {
-    var manager = new scUser({
-        "username": "ruben.macias",
-        "name": "ruben",
-        "password": "asdasd",
-        "lastName": "macias",
-        "mail": "ruben.macias@uptc.edu.co",
-        "type": "student",
-    });
-    manager.save(() => console.log("save"));
-    res.send({ "mensaje": "sign up successful" });
+router.post('/sign-up', async(req, res) => {
+    var user = await scUser.findOne({ "username": req.query.username });
+
+    if (user == null) {
+        var manager = new scUser({
+            "username": req.query.username,
+            "name": req.query.name,
+            "password": req.query.password,
+            "lastName": req.query.lastname,
+            "mail": req.query.mail,
+            "type": req.query.type,
+        });
+        manager.save(() => console.log("save"));
+        res.send({ "mensaje": "sign up successful" });
+    } else {
+        res.send({ "mensaje": "existing user" });
+    }
 });
 
-router.get('/sign-in', async(req, res) => {
-    var user = await scUser.findOne({ "username": "sergio.quintana" });
+router.post('/sign-in', async(req, res) => {
+    var user = await scUser.findOne({ "username": req.query.username });
     if (user != null) {
-        if (user.password === "asdasd") {
-            res.send({ "username": user._id, "password": "Correct", "name": user.name, "lastName": user.lastName, "type": user.type });
+        if (user.password === req.query.password) {
+            res.send({ "username": user.username, "password": "Correct", "name": user.name, "lastName": user.lastName, "type": user.type });
         } else {
             res.send({ "mensaje": "Incorrect password" });
         }
@@ -30,9 +36,25 @@ router.get('/sign-in', async(req, res) => {
 
 });
 
+router.get('/show-all-user', async(req, res) => {
+    scUser.find((err, doc) => {
+        res.send(doc);
+    });
+});
+
+router.get('/show-user', async(req, res) => {
+    scUser.find({ "username": req.query.username }, (err, doc) => {
+        console.log(`DB Total Documents: ${doc.length}`);
+        if (doc != null) {
+            res.send(doc);
+        } else {
+            res.send({ massage: "no existe usuario" });
+        }
+    });
+});
 router.delete('/delete-user', async(req, res) => {
     var user = await scUser.findOne({ "username": req.query.username });
-    if (user != null && user.type == "student") {
+    if (user != null && user.type != "admin") {
         await scUser.deleteOne(user);
         res.send({ massage: "delete succeful" });
     } else {
