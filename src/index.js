@@ -21,5 +21,5 @@ app.use(flash());
 app.use(cors());
 
 app.use(require('./routes/user'));
-
-app.listen(port, () => console.log(`Server Listen to Port ${port}`));
+app.set('port', process.env.PORT || port);
+app.listen(app.get('port'), () => console.log(`Server Listen to Port ${app.get('port')}`));
