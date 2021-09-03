@@ -37,9 +37,9 @@ router.post('/sign-in', async(req, res) => {
 });
 
 router.get('/show-all-user', async(req, res) => {
-    scUser.find((err, doc) => {
-        res.send(doc);
-    });
+    scUser.find((err, doc))
+        .then(doc => res.send(doc))
+        .catch(err => console.error(err));
 });
 
 router.get('/show-user', async(req, res) => {
