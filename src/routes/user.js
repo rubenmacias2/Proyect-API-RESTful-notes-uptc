@@ -26,7 +26,7 @@ router.post('/sign-in', async(req, res) => {
     var user = await scUser.findOne({ "username": req.query.username });
     if (user != null) {
         if (user.password === req.query.password) {
-            res.send({ "username": user.username, "password": "Correct", "name": user.name, "lastName": user.lastName, "type": user.type });
+            res.send(user);
         } else {
             res.send({ "mensaje": "Incorrect password" });
         }
