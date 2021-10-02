@@ -54,10 +54,15 @@ router.get('/show-user', async(req, res) => {
     });
 });
 router.delete('/delete-user', async(req, res) => {
-    var user = await scUser.findOne({ "username": req.query.username });
-    if (user != null && user.type != "admin") {
-        await scUser.deleteOne(user);
-        res.send({ massage: "delete succeful" });
+    var users = await scUser.find({ "username": req.query.username });
+    if (users != null) {
+        var i = 0;
+        for (const user of users) {
+            console.log(users);
+            i++;
+            await scUser.deleteOne(user);
+        }
+        res.send({ massage: `delete ${i} user succeful` });
     } else {
         res.send({ message: 'no existe' });
     }

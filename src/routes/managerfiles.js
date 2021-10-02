@@ -35,6 +35,10 @@ router.get('/lepatos', (req, res) => {
 
     }
 });
-
+router.get('/ar', (req, res) => {
+    var v = (JSON.parse(req.query.name));
+    console.log(v.length);
+    res.send("exito");
+});
 
 module.exports = router;

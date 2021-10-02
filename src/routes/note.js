@@ -33,10 +33,15 @@ router.get('/find-note', async(req, res) => {
     });
 });
 router.delete('/delete-nota', async(req, res) => {
-    var nota = await scNote.findOne({ "_id": req.query.idnota });
-    if (nota != null && nota.type != "admin") {
-        await scNote.deleteOne(nota);
-        res.send({ massage: "delete succeful" });
+    var notas = await scNote.find({ "_id": req.query.idnota });
+    if (notas != null) {
+        var i = 0;
+        for (const nota of notas) {
+            console.log(nota);
+            i++;
+            await scNote.deleteOne(nota);
+        }
+        res.send({ message: `delete ${i} notes succeful` });
     } else {
         res.send({ message: 'no existe' });
     }
