@@ -37,7 +37,6 @@ router.delete('/delete-nota', async(req, res) => {
     if (notas != null) {
         var i = 0;
         for (const nota of notas) {
-            console.log(nota);
             i++;
             await scNote.deleteOne(nota);
         }

@@ -58,7 +58,6 @@ router.delete('/delete-user', async(req, res) => {
     if (users != null) {
         var i = 0;
         for (const user of users) {
-            console.log(users);
             i++;
             await scUser.deleteOne(user);
         }

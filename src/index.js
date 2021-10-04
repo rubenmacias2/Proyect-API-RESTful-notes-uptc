@@ -9,7 +9,7 @@ app.use(cors());
 
 
 app.get('/', (req, res) => {
-    res.download(__dirname + '/config/ap.jpg');
+    res.sendFile(__dirname + '/files/duck.gif');
 });
 
 app.use(require('./routes/user'));
