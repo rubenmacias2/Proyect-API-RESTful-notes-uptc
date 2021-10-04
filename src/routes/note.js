@@ -20,7 +20,7 @@ router.get('/show-all-notes', async(req, res) => {
         } else {
             res.send({ massage: "no existen notas" });
         }
-    });
+    }).sort({ name: 1 });;
 });
 router.get('/find-note', async(req, res) => {
     scNote.find({ "_id": req.query.idnota }, (err, doc) => {

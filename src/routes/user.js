@@ -40,7 +40,7 @@ router.get('/show-all-user', async(req, res) => {
     scUser.find((err, doc) => {
         console.log(doc.length);
         res.send(doc);
-    });
+    }).sort({ name: 1 });
 });
 
 router.get('/show-user', async(req, res) => {
